@@ -2,7 +2,9 @@ require 'rubygems'
 gem 'hoe', '>= 2.1.0'
 require 'hoe'
 require 'fileutils'
-require './lib/contextually'
+
+$:.unshift(File.expand_path('lib', File.dirname(__FILE__)))
+require 'contextually'
 
 Hoe.plugin :newgem
 # Hoe.plugin :website
