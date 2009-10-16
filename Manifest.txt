@@ -1,0 +1,13 @@
+History.txt
+Manifest.txt
+README.rdoc
+Rakefile
+lib/contextually.rb
+lib/contextually/example_extension.rb
+script/console
+script/destroy
+script/generate
+spec/application_controller.rb
+spec/contextually_spec.rb
+spec/spec_helper.rb
+spec/spec_spec.rb
