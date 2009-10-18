@@ -18,6 +18,10 @@ module Contextually
     def before(name, &block)
       Contextually.roles[name].before = block
     end
+
+    def before_all(&block)
+      Contextually.before_all = block
+    end
   
     def deny_access_to(name, &block)
       Contextually.roles[name].deny_access = block
@@ -29,7 +33,7 @@ module Contextually
   end
   
   class << self
-    attr_accessor :roles, :deny_access_to_all
+    attr_accessor :roles, :deny_access_to_all, :before_all
     
     def groups
       @groups ||= {}

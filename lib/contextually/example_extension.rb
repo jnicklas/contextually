@@ -12,6 +12,7 @@ module Contextually
       roles, params = extract_params(args)
       roles.each do |role|
         context "as #{role}" do
+          before(&Contextually.before_all) if Contextually.before_all
           before(&Contextually.before(role))
           describe(params.dup, &block)
         end
@@ -24,6 +25,7 @@ module Contextually
         block = Contextually.deny_access(role)
         if block
           context "as #{role}" do
+            before(&Contextually.before_all) if Contextually.before_all
             before(&Contextually.before(role))
             describe(params.dup, &block)
           end

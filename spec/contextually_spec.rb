@@ -6,6 +6,10 @@ Contextually.define do
   group :user, :monkey, :as => :member
   group :visitor, :monkey, :as => :idiot
 
+  before_all do
+    controller.stub!(:global_before).and_return(true)
+  end
+
   before :user do
     controller.stub!(:current_user).and_return(:user)
   end
@@ -34,6 +38,7 @@ end
 
 class TestsController < ApplicationController
   def index
+    raise "global before not run" unless global_before
     if not current_user
       redirect_to new_session_url
     elsif not current_user == :user
