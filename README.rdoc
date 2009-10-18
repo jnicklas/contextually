@@ -6,17 +6,79 @@
 
 Contextually is a gem for running Rails controller tests under different user contexts in a convenient way. So you can test your authorization without much effort.
 
-== Features/Problems:
-
-* FIX (list of features or problems)
-
 == Synopsis:
 
-  FIX (code sample of usage)
+Somewhere sensible (like your spec helper file), define your contexts like this:
+
+    Contextually.define do
+      roles :user, :visitor, :monkey
+
+      group :user, :monkey, :as => :member
+      group :visitor, :monkey, :as => :idiot
+
+      before :user do
+        controller.stub!(:current_user).and_return(:user)
+      end
+      before :visitor do
+        controller.stub!(:current_user).and_return(nil)
+      end
+      before :monkey do
+        controller.stub!(:current_user).and_return(:monkey)
+      end
+
+      deny_access_to :visitor do
+        it("should deny access") { should redirect_to(new_session_url) }
+      end
+      deny_access do
+        it("should deny access") { should redirect_to(root_url) }
+      end
+    end
+
+Then use them in your controller specs like this:
+
+    describe TestsController do
+      as :user, :get => :index do
+        it { should respond_with(:success) }
+      end
+
+      as :visitor, :get => :index do
+        it("should deny access") { should redirect_to(new_session_url) }
+      end
+
+      as :visitor, :monkey, :user, :get => :show do
+        it { should respond_with(:success) }
+      end
+  
+      as :visitor, :monkey, :user, "GET /test" do
+        describe :get => :show do
+          it { should respond_with(:success) }
+        end
+      end
+
+      as :visitor, :monkey, :user do
+        describe :get => :show do
+          it { should respond_with(:success) }
+        end
+      end
+
+      only_as :user, :get => :index do
+        it { should respond_with(:success) }
+      end
+  
+      deny_access_to :monkey, :visitor, :get => :index
+
+      deny_access_to :idiot, :get => :index
+
+      only_as :member, :get => :foo do
+        it { should respond_with(:success) }
+      end
+    end
 
 == Install:
 
-  
+Contextually is hosted on Gemcutter.org only. Add this to your Rails test environment:
+
+    config.gem "contextually"
 
 == License:
 
