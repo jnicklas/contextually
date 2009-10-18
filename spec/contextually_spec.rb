@@ -103,5 +103,9 @@ describe TestsController, :type => :controller do
       it { should respond_with(:success) }
     end
   end
+
+  context "with only_allow_access_to" do
+    only_allow_access_to :user, :get => :index
+  end
 end
 

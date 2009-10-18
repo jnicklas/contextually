@@ -74,3 +74,9 @@ TestsController with groups as monkey responding to #GET foo
 
 TestsController with groups as visitor responding to #GET foo
 - should deny access
+
+TestsController with only_allow_access_to as visitor responding to #GET index
+- should deny access
+
+TestsController with only_allow_access_to as monkey responding to #GET index
+- should deny access

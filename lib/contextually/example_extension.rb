@@ -2,10 +2,7 @@ module Contextually
   module ExampleExtension
     def only_as(*args, &block)
       as(*args, &block)
-      roles, params = extract_params(args)
-      deny_params = Contextually.roles.keys - roles
-      deny_params.push(params)
-      deny_access_to(*deny_params)
+      only_allow_access_to(*args)
     end
   
     def as(*args, &block)
@@ -33,6 +30,13 @@ module Contextually
           raise Contextually::UndefinedContext, "don't know how to deny access to a #{role}"
         end
       end
+    end
+
+    def only_allow_access_to(*args)
+      roles, params = extract_params(args)
+      deny_params = Contextually.roles.keys - roles
+      deny_params.push(params)
+      deny_access_to(*deny_params)
     end
   
   private
