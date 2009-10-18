@@ -3,6 +3,7 @@ Manifest.txt
 README.rdoc
 Rakefile
 lib/contextually.rb
+lib/contextually/definition.rb
 lib/contextually/example_extension.rb
 script/console
 script/destroy
