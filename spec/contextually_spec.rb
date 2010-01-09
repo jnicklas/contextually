@@ -86,6 +86,23 @@ describe TestsController, :type => :controller do
     end
   end
   
+  context "with multiple roles as an array" do
+    as [:visitor, :monkey, :user], :get => :show do
+      it { should respond_with(:success) }
+    end
+    
+    as [:visitor, :monkey, :user], "GET /test" do
+      describe :get => :show do
+        it { should respond_with(:success) }
+      end
+    end
+
+    as [:visitor, :monkey, :user] do
+      describe :get => :show do
+        it { should respond_with(:success) }
+      end
+    end
+  end
   context "with only_as" do
     only_as :user, :get => :index do
       it { should respond_with(:success) }
