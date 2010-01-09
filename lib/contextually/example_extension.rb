@@ -42,7 +42,7 @@ module Contextually
   private
 
     def extract_params(args)
-			args.flatten!
+      args.flatten!
       if args.blank? or args.last.is_a?(Symbol) 
         params = ""
       else
