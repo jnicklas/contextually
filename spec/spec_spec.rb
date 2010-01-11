@@ -45,6 +45,33 @@ TestsController with multiple roles as monkey  responding to #GET show
 TestsController with multiple roles as user  responding to #GET show
 - should respond with success
 
+TestsController with multiple roles as an array as visitor responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as monkey responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as user responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as visitor GET /test responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as monkey GET /test responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as user GET /test responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as visitor  responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as monkey  responding to #GET show
+- should respond with success
+
+TestsController with multiple roles as an array as user  responding to #GET show
+- should respond with success
+
 TestsController with only_as as user responding to #GET index
 - should respond with success
 
